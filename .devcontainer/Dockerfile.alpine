@@ -1,0 +1,24 @@
+FROM alpine:3.21.0
+ENV USER_ID=1000
+ENV GROUP_ID=1000
+ENV USER_NAME=container-user
+ENV GROUP_NAME=container-user
+
+RUN addgroup -g $GROUP_ID $GROUP_NAME && \
+    adduser --shell /bin/bash --disabled-password \
+    --uid $USER_ID --ingroup $GROUP_NAME $USER_NAME 
+
+# Ensure /home/container-user is owned by container-user
+RUN mkdir -p /home/container-user/.vscode-server && \
+    chown -R $USER_NAME:$GROUP_NAME /home/container-user
+
+RUN mkdir -p /home/container-user/project && \
+    chown -R $USER_NAME:$GROUP_NAME /home/container-user
+
+RUN apk update && \
+    apk add --no-cache \
+    xclip \
+    bash \
+    curl
+
+RUN curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b /usr/local/bin

@@ -1,0 +1,15 @@
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
+    volumes:
+      - ..:/workspace:cached
+    networks:
+      - internal
+    command: ["sleep", "infinity"]
+
+networks:
+
+  internal:
+    driver: bridge

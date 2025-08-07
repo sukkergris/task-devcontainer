@@ -1,0 +1,7 @@
+{
+    "name": "Alpine Development Container",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/workspace",
+    "remoteUser": "container-user"
+}
