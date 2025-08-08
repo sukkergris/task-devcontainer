@@ -19,6 +19,8 @@ RUN apk update && \
     apk add --no-cache \
     xclip \
     bash \
-    curl
+    bash-completion \
+    curl \
+    git
 
 RUN curl -sL https://taskfile.dev/install.sh | sh -s -- -d -b /usr/local/bin
